@@ -18,16 +18,18 @@ namespace Lincence_APIs.Controllers
     public class AuthorizeController : ControllerBase
     {
         [HttpPost]
-
-        [Authorize]
+        //[Authorize]
         [Route("allowservice")]
-        public async Task<IActionResult> AllowService(Authorize auth)
+        public async Task<IActionResult> AllowService(Authorize[] auth)
         {
             
             AllowServiceBLL authbll = new AllowServiceBLL();
-
-            authbll.Authorize(auth);
-            return Ok("dd");
+            foreach(var item in auth)
+            {
+                authbll.Authorize(item);
+            }
+            
+            return Ok(new {message="save"});
         }
 
         [HttpDelete]
