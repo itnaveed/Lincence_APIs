@@ -12,7 +12,6 @@ namespace Business_Logics
         {
             Allow_ServiceDLL dal = new Allow_ServiceDLL();
             return dal.Allow_service(us);
-
         }
         public Authorize removeAuth(int Id=0)
         {
