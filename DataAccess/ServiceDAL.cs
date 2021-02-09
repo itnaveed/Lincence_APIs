@@ -13,7 +13,16 @@ namespace DataAccess
         {
             try
             {
-                db.Repository<Service>().Add(service);
+                if (service.Id > 0)
+                {
+                    db.Repository<Service>().Update(service);
+
+                }
+                else
+                {
+                    db.Repository<Service>().Add(service);
+                }
+                
                 return service;
             }
             catch (Exception exp)

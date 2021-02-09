@@ -16,7 +16,6 @@ namespace Lincence_APIs.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        
         [HttpPost]
         //[Authorize]
         [Route("RegisterUser")]

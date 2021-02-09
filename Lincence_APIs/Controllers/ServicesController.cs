@@ -33,6 +33,24 @@ namespace Lincence_APIs.Controllers
             }
             
         }
+
+        [Route("updateService")]
+        [HttpPut]
+        //[Authorize]
+        public async Task<IActionResult> UpdateService(Service _service)
+        {
+            try
+            {
+                ServiceBLL ser = new ServiceBLL();
+                ser.AddService(_service);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
         //[Authorize]
         [HttpGet]
         [Route("ServicesList")]
