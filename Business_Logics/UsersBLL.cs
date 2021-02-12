@@ -34,5 +34,11 @@ namespace Business_Logics
             return dal.UserVerification(Email);
 
         }
+        public User getDetail(int Id=0)
+        {
+            UsersDAL users = new UsersDAL();
+
+            return users.getDetail(Id);
+        }
     }
 }

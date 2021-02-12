@@ -13,17 +13,24 @@ namespace DataAccess
         {
             try
             {
-                User us = UserVerification(user.Email);
-                if (us==null)
+                if (user.Id > 0)
                 {
-                    db.Repository<User>().Add(user);
+                    db.Repository<User>().Update(user);
                     return user;
                 }
                 else
                 {
-                    return null;
+                    User us = UserVerification(user.Email);
+                    if (us == null)
+                    {
+                        db.Repository<User>().Add(user);
+                        return user;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-               
             }
             catch (Exception exp)
             {
@@ -40,6 +47,10 @@ namespace DataAccess
         public IEnumerable<User> UsersList()
         {
             return db.Repository<User>().GetAll().ToList();
+        }
+        public User getDetail(int ID=0)
+        {
+            return db.Repository<User>().GetAll().Where(m=>m.Id == ID).FirstOrDefault();
         }
         public User UserVerification(string Email)
         {

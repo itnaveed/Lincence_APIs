@@ -74,5 +74,30 @@ namespace Lincence_APIs.Controllers
             UsersBLL userbll = new UsersBLL();
             return userbll.UsersList();
         }
+        [HttpGet]
+        [Route("GetDetail/{id}")]
+        public User GetDetail(int id=0)
+        {
+            //string accessToken = Request.Headers["Authorization"];
+            //var data = JwtHelper.DecodeJWT(accessToken);
+            UsersBLL userbll = new UsersBLL();
+            User userInfo = userbll.getDetail(id);
+            userInfo.Password = Encryption.Decrypt(userInfo.Password, "asdfewrewqrss323");
+            return userInfo;
+        }
+        [HttpPut]
+        //[Authorize]
+        [Route("updateUser")]
+        public async Task<IActionResult> updateUser(User admin)
+        {
+            admin.Password = Encryption.Encrypt(admin.Password, "asdfewrewqrss323");
+            UsersBLL userbll = new UsersBLL();
+
+            var userInfo = userbll.RegisterUser(admin);
+           
+                return Ok(new { message = "User updated successfully." });
+            
+
+        }
     }
 }
